@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2M PHOTO</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #000000;
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 5rem;
+            letter-spacing: -5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">2M</div>
+
+    <script>
+        (function() {
+            const lang = (navigator.language || 'en').split('-')[0].toLowerCase();
+            
+            if (lang === 'ru') {
+                window.location.replace('ru/index.html');
+            } else if (lang === 'he') {
+                window.location.replace('he/index.html');
+            } else {
+                window.location.replace('en/index.html');
+            }
+        })();
+    </script>
+</body>
+</html>
