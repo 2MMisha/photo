@@ -39,6 +39,8 @@
             position: relative;
             z-index: 10;
         }
+
+        /* === ОБНОВЛЁННЫЙ ХЕДЕР === */
         nav {
             display: flex;
             justify-content: space-between;
@@ -46,20 +48,52 @@
             padding: 30px 0;
             border-bottom: 1px solid rgba(255,255,255,0.2);
             margin-bottom: 60px;
+            gap: 20px;
         }
-        .logo {
-            font-size: 2rem;
+        .logo-link {
+            display: block;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+            transition: opacity 0.3s;
+        }
+        .logo-img:hover {
+            opacity: 0.7;
+        }
+        .by-media {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: opacity 0.3s;
+        }
+        .by-media:hover {
+            opacity: 0.6;
+        }
+        .by-text {
+            font-family: 'Arimo', 'Arial', sans-serif;
             font-weight: 700;
-            letter-spacing: -2px;
-            background-color: #ffffff;
-            color: #000000;
-            padding: 5px 15px;
-            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #ffffff;
+            opacity: 0.5;
+        }
+        .media-logo {
+            height: 30px;
+            width: auto;
+            display: block;
         }
         .nav-links {
             display: flex;
             gap: 40px;
             list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .nav-links a {
             color: #ffffff;
@@ -69,10 +103,12 @@
             text-transform: uppercase;
             transition: 0.3s;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
         .nav-links a:hover, .nav-links a.active {
             text-decoration: line-through;
         }
+
         h1 {
             font-weight: 700;
             font-size: clamp(4rem, 8vw, 7rem);
@@ -137,24 +173,48 @@
             font-weight: 600;
             letter-spacing: 2px;
         }
-		.logo-img {
-    height: 50px;
-    width: auto;
-    display: block;
-}
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            .nav-links {
+                gap: 15px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+            .row {
+                grid-template-columns: 1fr 1fr 1fr;
+                font-size: 1rem;
+                padding: 20px 15px;
+            }
+            .price {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="glitch-grid"></div>
     <div class="container">
+        <!-- ОБНОВЛЁННЫЙ ХЕДЕР -->
         <nav>
-            <img src="logo.png" alt="2M Media" class="logo-img">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="2M Photo" class="logo-img">
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Главная</a></li>
                 <li><a href="about.html">О нас</a></li>
                 <li><a href="#" class="active">Прайс</a></li>
                 <li><a href="contact.html">Контакты</a></li>
             </ul>
+            <a href="https://2mmedia.co" target="_blank" class="by-media">
+                <span class="by-text">BY</span>
+                <img src="2m.png" alt="2M Media" class="media-logo">
+            </a>
         </nav>
 
         <h1>СКОЛЬКО<br>СТОИТ</h1>

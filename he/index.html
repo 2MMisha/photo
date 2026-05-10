@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2M PHOTO — ПРОДАКШН ВНЕ РАМОК</title>
+    <title>2M PHOTO — הפקות מחוץ למסגרת</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -22,7 +22,6 @@
             cursor: crosshair;
         }
 
-        /* ЭКСТРАВАГАНТНЫЕ ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ */
         .glitch-grid {
             position: fixed;
             top: 0;
@@ -56,7 +55,6 @@
             z-index: 10;
         }
 
-        /* ТИПОГРАФИКА */
         h1 {
             font-family: 'Arimo', 'Arial', sans-serif;
             font-weight: 700;
@@ -87,7 +85,7 @@
             margin-bottom: 40px;
         }
 
-        /* === ОБНОВЛЁННАЯ НАВИГАЦИЯ === */
+        /* НОВЫЙ ХЕДЕР С ЛОГОТИПАМИ */
         nav {
             display: flex;
             justify-content: space-between;
@@ -105,7 +103,7 @@
         }
 
         .logo-img {
-            height: 50px;
+            height: 45px;
             width: auto;
             display: block;
             transition: opacity 0.3s;
@@ -113,6 +111,30 @@
 
         .logo-img:hover {
             opacity: 0.7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            text-decoration: line-through;
         }
 
         .by-media {
@@ -143,36 +165,6 @@
             display: block;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            position: relative;
-            transition: 0.3s;
-            letter-spacing: 1px;
-            white-space: nowrap;
-        }
-
-        .nav-links a:hover {
-            text-decoration: line-through;
-            opacity: 0.7;
-        }
-
-        .nav-links a.active {
-            text-decoration: line-through;
-        }
-
-        /* КНОПКИ */
         .btn {
             display: inline-block;
             background-color: #ffffff;
@@ -193,13 +185,12 @@
             background-color: transparent;
             color: #ffffff;
             transform: scale(1.05);
-            box-shadow: 15px 15px 0px rgba(255,255,255,0.8);
+            box-shadow: -15px 15px 0px rgba(255,255,255,0.8);
         }
 
         .btn-outline {
             background-color: transparent;
             color: #ffffff;
-            margin-left: 15px;
         }
 
         .btn-outline:hover {
@@ -208,7 +199,6 @@
             box-shadow: none;
         }
 
-        /* СЕТКА ПРЕИМУЩЕСТВ */
         .hero-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -219,7 +209,7 @@
 
         .hero-main {
             padding: 80px 60px;
-            border-right: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
         }
 
         .hero-side {
@@ -247,6 +237,7 @@
             font-weight: 700;
             font-size: 2rem;
             text-transform: uppercase;
+            direction: ltr;
         }
 
         .marquee span {
@@ -269,6 +260,37 @@
             letter-spacing: 2px;
         }
 
+        /* RTL */
+        [dir="rtl"] h1,
+        [dir="rtl"] h2,
+        [dir="rtl"] h3,
+        [dir="rtl"] p,
+        [dir="rtl"] li,
+        [dir="rtl"] a,
+        [dir="rtl"] label {
+            text-align: right;
+        }
+
+        [dir="rtl"] .btn {
+            margin-left: 0;
+            margin-right: 15px;
+        }
+
+        [dir="rtl"] .btn:first-child {
+            margin-right: 0;
+        }
+
+        [dir="rtl"] .hero-main {
+            border-right: none;
+            border-left: 2px solid #ffffff;
+        }
+
+        [dir="rtl"] input,
+        [dir="rtl"] textarea {
+            text-align: right;
+            direction: rtl;
+        }
+
         @media (max-width: 768px) {
             nav {
                 flex-direction: column;
@@ -281,13 +303,6 @@
             .nav-links a {
                 font-size: 0.85rem;
             }
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-main {
-                border-right: none;
-                border-bottom: 2px solid #ffffff;
-            }
         }
     </style>
 </head>
@@ -296,58 +311,61 @@
     <div class="scanline"></div>
 
     <div class="container">
-        <!-- ОБНОВЛЁННЫЙ ХЕДЕР -->
+        <!-- ХЕДЕР -->
         <nav>
             <a href="index.html" class="logo-link">
-                <img src="logo.png" alt="2M Photo" class="logo-img">
+                <img src="../лого.png" alt="2M Photo" class="logo-img">
             </a>
             <ul class="nav-links">
-                <li><a href="#" class="active">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="price.html">Прайс</a></li>
-                <li><a href="contact.html">Контакты</a></li>
+                <li><a href="index.html" class="active">ראשי</a></li>
+                <li><a href="about.html">אודות</a></li>
+                <li><a href="price.html">מחירון</a></li>
+                <li><a href="contact.html">צור קשר</a></li>
             </ul>
             <a href="https://2mmedia.co" target="_blank" class="by-media">
                 <span class="by-text">BY</span>
-                <img src="2m.png" alt="2M Media" class="media-logo">
+                <img src="../2m.png" alt="2M Media" class="media-logo">
             </a>
         </nav>
 
+        <!-- ЗАГОЛОВОК -->
         <div style="position: relative;">
-            <div style="position: absolute; top: -30px; right: -20px; font-size: 1.5rem; font-weight: 700; background: #fff; color: #000; padding: 10px 20px; transform: rotate(5deg); z-index: 20;">ОБРАЗОВАНИЕ В ПРОДАКШЕНЕ</div>
+            <div style="position: absolute; top: -30px; left: -20px; font-size: 1.5rem; font-weight: 700; background: #fff; color: #000; padding: 10px 20px; transform: rotate(-5deg); z-index: 20;">השכלה בהפקה</div>
             <h1>
-                ФОТО<br>
-                <span class="hollow-text">ВИДЕО</span><br>
-                ПРЕВОСХОДСТВО
+                צילום<br>
+                <span class="hollow-text">וידאו</span><br>
+                עליונות
             </h1>
         </div>
 
+        <!-- HERO -->
         <div class="hero-grid">
             <div class="hero-main">
                 <p style="font-size: 1.5rem; font-weight: 500; line-height: 1.4; max-width: 600px;">
-                    Мы не просто снимаем. Мы создаем визуальные активы с точностью нейрохирурга. Оборудование, которое видят в снах голливудские операторы. Команда с фундаментальным образованием в video production.
+                    אנחנו לא רק מצלמים. אנחנו יוצרים נכסים ויזואליים בדיוק של מנתח מוח. ציוד שהאופרטורים בהוליווד חולמים עליו. צוות עם השכלה אקדמית בהפקת וידאו.
                 </p>
-                <a href="contact.html" class="btn">СВЯЗАТЬСЯ СЕЙЧАС</a>
-                <a href="price.html" class="btn btn-outline">СМОТРЕТЬ ПРАЙС</a>
+                <a href="contact.html" class="btn">צור קשר עכשיו</a>
+                <a href="price.html" class="btn btn-outline">מחירון</a>
             </div>
             <div class="hero-side">
                 <div>
                     <span class="stat-number">8K</span>
-                    <p style="font-weight: 600; font-size: 1.2rem;">РАЗРЕШЕНИЕ ПО УМОЛЧАНИЮ</p>
+                    <p style="font-weight: 600; font-size: 1.2rem;">רזולוציית ברירת מחדל</p>
                 </div>
                 <div style="margin-top: 30px;">
                     <span class="stat-number">0%</span>
-                    <p style="font-weight: 600; font-size: 1.2rem;">ДИЛЕТАНТОВ В КОМАНДЕ</p>
+                    <p style="font-weight: 600; font-size: 1.2rem;">חובבנים בצוות</p>
                 </div>
             </div>
         </div>
 
+        <!-- БЕГУЩАЯ СТРОКА -->
         <div class="marquee">
-            <span>ARRI ALEXA 35 • RED KOMODO • SONY VENICE • ПРОФЕССИОНАЛЬНЫЙ СВЕТ • ОБРАЗОВАНИЕ ВГИК / NEW YORK FILM ACADEMY • ARRI ALEXA 35 • RED KOMODO •</span>
+            <span>ARRI ALEXA 35 • RED KOMODO • SONY VENICE • תאורה מקצועית • בוגרי בצלאל / NYFA • ARRI ALEXA 35 • RED KOMODO •</span>
         </div>
 
         <footer>
-            © 2M MEDIA — ПРОДАКШН С МОЗГАМИ. ВСЕ ПРАВА ЗАЩИЩЕНЫ. ДУМАЙТЕ ПЕРЕД ТЕМ, КАК СНИМАТЬ.
+            © 2M MEDIA — הפקה עם מוח. כל הזכויות שמורות. תחשוב לפני שאתה מצלם.
         </footer>
     </div>
 </body>

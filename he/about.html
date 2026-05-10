@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2M PHOTO — О НАС</title>
+    <title>2M PHOTO — אודות</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -18,6 +18,7 @@
             font-family: 'Arimo', 'Arial', sans-serif;
             color: #ffffff;
             overflow-x: hidden;
+            direction: rtl;
         }
         .glitch-grid {
             position: fixed;
@@ -39,8 +40,6 @@
             position: relative;
             z-index: 10;
         }
-
-        /* === ОБНОВЛЁННЫЙ ХЕДЕР === */
         nav {
             display: flex;
             justify-content: space-between;
@@ -108,7 +107,6 @@
         .nav-links a:hover, .nav-links a.active {
             text-decoration: line-through;
         }
-
         h1 {
             font-family: 'Arimo', 'Arial', sans-serif;
             font-weight: 700;
@@ -120,14 +118,16 @@
             display: inline-block;
             padding-bottom: 20px;
             margin-bottom: 60px;
+            text-align: right;
         }
         .manifesto {
             font-size: 2rem;
             font-weight: 600;
             line-height: 1.4;
             margin-bottom: 60px;
-            border-left: 10px solid #ffffff;
-            padding-left: 40px;
+            border-right: 10px solid #ffffff;
+            padding-right: 40px;
+            text-align: right;
         }
         .team-grid {
             display: grid;
@@ -139,9 +139,10 @@
         .profile {
             padding: 60px 40px;
             border-bottom: 2px solid #ffffff;
+            text-align: right;
         }
         .profile:nth-child(odd) {
-            border-right: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
         }
         .profile h3 {
             font-size: 3rem;
@@ -158,6 +159,12 @@
             letter-spacing: 1px;
             margin-bottom: 15px;
         }
+        .equipment {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
         footer {
             border-top: 1px solid #ffffff;
             padding: 30px 0;
@@ -165,6 +172,12 @@
             text-align: center;
             font-weight: 600;
             letter-spacing: 2px;
+            direction: rtl;
+        }
+
+        /* RTL-фиксы */
+        input, textarea {
+            text-align: right;
         }
 
         @media (max-width: 768px) {
@@ -183,7 +196,7 @@
                 grid-template-columns: 1fr;
             }
             .profile:nth-child(odd) {
-                border-right: none;
+                border-left: none;
             }
         }
     </style>
@@ -191,30 +204,30 @@
 <body>
     <div class="glitch-grid"></div>
     <div class="container">
-        <!-- ОБНОВЛЁННЫЙ ХЕДЕР -->
+        <!-- ХЕДЕР -->
         <nav>
             <a href="index.html" class="logo-link">
-                <img src="logo.png" alt="2M Photo" class="logo-img">
+                <img src="../logo.png" alt="2M Photo" class="logo-img">
             </a>
             <ul class="nav-links">
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="#" class="active">О нас</a></li>
-                <li><a href="price.html">Прайс</a></li>
-                <li><a href="contact.html">Контакты</a></li>
+                <li><a href="index.html">ראשי</a></li>
+                <li><a href="#" class="active">אודות</a></li>
+                <li><a href="price.html">מחירון</a></li>
+                <li><a href="contact.html">צור קשר</a></li>
             </ul>
             <a href="https://2mmedia.co" target="_blank" class="by-media">
                 <span class="by-text">BY</span>
-                <img src="2m.png" alt="2M Media" class="media-logo">
+                <img src="../2m.png" alt="2M Media" class="media-logo">
             </a>
         </nav>
 
-        <h1>КТО<br>МЫ</h1>
+        <h1>מי<br>אנחנו</h1>
 
         <div class="manifesto">
-            Креативное агентство 2M Media заходит в фото и видео индустрию с академическим бэкграундом. Каждый член команды имеет профильное образование в сфере video production. Мы не полагаемся на «вдохновение» — мы опираемся на оптику, композицию и понимание света.
+            סוכנות הקריאייטיב 2M Media נכנסת לתעשיית הצילום והווידאו עם רקע אקדמי. כל חבר צוות הוא בעל השכלה מקצועית בהפקת וידאו. אנחנו לא מסתמכים על "השראה" — אנחנו נשענים על אופטיקה, קומפוזיציה והבנת אור.
         </div>
 
-        <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 40px; flex-wrap: wrap;">
+        <div class="equipment">
             <span style="font-size: 4rem; font-weight: 700;">ARRI</span>
             <span style="font-size: 1.5rem;">×</span>
             <span style="font-size: 4rem; font-weight: 700;">RED</span>
@@ -224,29 +237,29 @@
 
         <div class="team-grid">
             <div class="profile">
-                <div class="label">ОПЕРАТОР-ПОСТАНОВЩИК</div>
-                <h3>МАКС</h3>
-                <p>ВГИК, мастерская операторского искусства. 10 лет в индустрии. Снимает так, что свет сам выстраивается в кадр.</p>
+                <div class="label">צלם ראשי</div>
+                <h3>מקס</h3>
+                <p>בוגר בצלאל, מגמת צילום. 10 שנות ניסיון בתעשייה. מצלם כך שהאור מסתדר בפריים בעצמו.</p>
             </div>
             <div class="profile">
-                <div class="label">ПРОДЮСЕР / РЕЖИССЕР</div>
-                <h3>МАРИЯ</h3>
-                <p>NY Film Academy. Контролирует продакшн от брифа до постпродакшна. Тайм-менеджмент уровня NASA.</p>
+                <div class="label">מפיקה / במאית</div>
+                <h3>מריה</h3>
+                <p>NY Film Academy. שולטת בהפקה מהתקציר ועד הפוסט-פרודקשן. ניהול זמן ברמה של נאס"א.</p>
             </div>
             <div class="profile">
-                <div class="label">ФОТОГРАФ-ХУДОЖНИК</div>
-                <h3>АЛЕКС</h3>
-                <p>Британская школа дизайна. Создает кадры, которые попадают в международные фэшн-издания.</p>
+                <div class="label">צלמת-אמנית</div>
+                <h3>אלכס</h3>
+                <p>בוגרת שנקר. יוצרת פריימים שמגיעים למגזיני אופנה בין-לאומיים.</p>
             </div>
             <div class="profile">
-                <div class="label">ГЕЙМЧЕНДЖЕР</div>
-                <h3>ТЫ</h3>
-                <p>Присоединяйся к проектам с лучшим оборудованием. Контакты ниже.</p>
+                <div class="label">משנה משחק</div>
+                <h3>את/ה</h3>
+                <p>הצטרף/י לפרויקטים עם הציוד הטוב ביותר. פרטי קשר בהמשך.</p>
             </div>
         </div>
 
         <footer>
-            © 2M MEDIA — ОБРАЗОВАНИЕ ИМЕЕТ ЗНАЧЕНИЕ.
+            © 2M MEDIA — השכלה עושה את ההבדל.
         </footer>
     </div>
 </body>
