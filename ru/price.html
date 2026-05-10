@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2M PHOTO — ПРАЙС</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000000;
+            font-family: 'Arimo', 'Arial', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .glitch-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 10;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 60px;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 5px 15px;
+            display: inline-block;
+        }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            text-decoration: line-through;
+        }
+        h1 {
+            font-weight: 700;
+            font-size: clamp(4rem, 8vw, 7rem);
+            letter-spacing: -5px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            line-height: 0.9;
+            border-bottom: 4px solid #ffffff;
+            display: inline-block;
+            padding-bottom: 20px;
+        }
+        .price-table {
+            border: 2px solid #ffffff;
+            width: 100%;
+        }
+        .row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            border-bottom: 2px solid #ffffff;
+            padding: 30px 20px;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.3rem;
+            transition: 0.2s;
+        }
+        .row:last-child {
+            border-bottom: none;
+        }
+        .row:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+            text-align: right;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 18px 40px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid #ffffff;
+            transition: 0.2s;
+            margin-top: 50px;
+        }
+        .btn:hover {
+            background-color: transparent;
+            color: #ffffff;
+        }
+        footer {
+            border-top: 1px solid #ffffff;
+            padding: 30px 0;
+            margin-top: 80px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+		.logo-img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+    </style>
+</head>
+<body>
+    <div class="glitch-grid"></div>
+    <div class="container">
+        <nav>
+            <img src="logo.png" alt="2M Media" class="logo-img">
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="#" class="active">Прайс</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+            </ul>
+        </nav>
+
+        <h1>СКОЛЬКО<br>СТОИТ</h1>
+
+        <div class="price-table">
+            <div class="row">
+                <span>ФОТОСЪЕМКА (ПОРТРЕТ / ФЭШН)</span>
+                <span>2 ЧАСА</span>
+                <span class="price">30 000 ₽</span>
+            </div>
+            <div class="row">
+                <span>ВИДЕО-ПРОДАКШН (РЕКЛАМА)</span>
+                <span>СМЕНА 8 Ч</span>
+                <span class="price">120 000 ₽</span>
+            </div>
+            <div class="row">
+                <span>МУЗЫКАЛЬНЫЙ КЛИП</span>
+                <span>ПОД КЛЮЧ</span>
+                <span class="price">200 000 ₽</span>
+            </div>
+            <div class="row">
+                <span>ПРЕДМЕТНАЯ СЪЕМКА</span>
+                <span>1 ПРЕДМЕТ</span>
+                <span class="price">15 000 ₽</span>
+            </div>
+            <div class="row">
+                <span>АРЕНДА СВЕТА + ОПЕРАТОР</span>
+                <span>СМЕНА</span>
+                <span class="price">50 000 ₽</span>
+            </div>
+            <div class="row" style="background: #ffffff; color: #000000;">
+                <span style="font-size: 2rem;">ЭКСТРАВАГАНТНЫЙ ПАКЕТ</span>
+                <span>ДОГОВОРНАЯ</span>
+                <span class="price">∞</span>
+            </div>
+        </div>
+
+        <p style="margin-top: 40px; font-size: 1.2rem; font-weight: 500;">
+            * Все цены включают работу профессионалов с образованием video production. Оборудование уровня ARRI / RED включено в базовые пакеты.
+        </p>
+
+        <a href="contact.html" class="btn">ЗАПРОСИТЬ БРИФ</a>
+
+        <footer>
+            © 2M MEDIA — ЦЕНА ОПРАВДАНА ОБРАЗОВАНИЕМ.
+        </footer>
+    </div>
+</body>
+</html>
