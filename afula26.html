@@ -301,6 +301,7 @@
   </div>
 
   <form id="registrationForm" action="https://formsubmit.co/2mmedia.il@gmail.com" method="POST">
+    <input type="hidden" name="_next" value="https://photo.2mmedia.co/afula26.html">
     <div id="hiddenCategoriesContainer"></div>
     
     <!-- שלב 1: סוג רישום וצילום -->
@@ -438,13 +439,11 @@
       if (step === 4) updateSummary();
     }
 
-    // Clear all error states
     function clearErrors() {
       document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
       document.querySelectorAll('.required-field').forEach(el => el.classList.remove('error'));
     }
 
-    // Show specific error
     function showFieldError(inputId, errorId) {
       const input = document.getElementById(inputId);
       const error = document.getElementById(errorId);
@@ -452,7 +451,6 @@
       if (error) error.style.display = 'block';
     }
 
-    // Validate step 2 fields
     function validateStep2() {
       clearErrors();
       let valid = true;
@@ -506,7 +504,6 @@
       return valid;
     }
 
-    // Validate step 3 categories
     function validateStep3() {
       const catError = document.getElementById('categoryError');
       const selected = getSelectedCategories();
@@ -560,10 +557,11 @@
       const container = document.getElementById('hiddenCategoriesContainer');
       container.innerHTML = '';
       const selected = getSelectedCategories();
+      // Создаём отдельное скрытое поле для каждой выбранной категории
       selected.forEach(cat => {
         const input = document.createElement('input');
         input.type = 'hidden';
-        input.name = 'categories';
+        input.name = 'categories[]';
         input.value = cat;
         container.appendChild(input);
       });
@@ -674,7 +672,7 @@
         showStep(3);
         return;
       }
-      alert('הטופס נשלח בהצלחה! תודה שנרשמת.');
+      // Отправляем форму, после успешной отправки произойдёт редирект благодаря _next
       form.submit();
     });
 
