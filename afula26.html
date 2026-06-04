@@ -129,4 +129,459 @@
     input::placeholder {
       color: #888;
     }
-    input:focus
+    input:focus, select:focus {
+      border-color: #d4af37;
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      background: #2a2a2a;
+      padding: 0.8rem 1rem;
+      border-radius: 24px;
+    }
+    .radio-option, .checkbox-option {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #1a1a1a;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      border: 1px solid #444;
+      color: #ffffff;
+    }
+    .radio-option input, .checkbox-option input {
+      width: auto;
+      margin: 0;
+      accent-color: #d4af37;
+    }
+    .radio-option label, .checkbox-option label {
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .category-card {
+      background: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 20px;
+      padding: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: 0.2s;
+      color: #ffffff;
+    }
+    .category-card:hover {
+      border-color: #d4af37;
+    }
+    .category-card input {
+      width: auto;
+      margin: 0;
+      accent-color: #d4af37;
+    }
+    .category-card label {
+      color: #ffffff;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+    button {
+      background: #d4af37;
+      border: none;
+      color: #000;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 35px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 6px 14px rgba(212, 175, 55, 0.3);
+      letter-spacing: 0.5px;
+    }
+    button:hover {
+      background: #c9a52c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+    }
+    button.secondary {
+      background: #333;
+      color: #ffffff;
+      box-shadow: none;
+      border: 1px solid #555;
+    }
+    button.secondary:hover {
+      background: #444;
+    }
+    button:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .summary-box {
+      background: #2a2a2a;
+      border-radius: 24px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      color: #ffffff;
+      border: 1px solid #444;
+    }
+    .summary-box p {
+      margin-bottom: 0.5rem;
+    }
+    .summary-box strong {
+      color: #d4af37;
+    }
+    hr {
+      border: 0.5px solid #444;
+      margin: 1rem 0;
+    }
+    .error-message {
+      color: #ff6b6b;
+      font-size: 0.85rem;
+      margin-top: -0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .selected-category-tag {
+      display: inline-block;
+      background: #d4af37;
+      color: #000;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin: 0.2rem;
+      font-weight: 600;
+    }
+
+    h4 {
+      color: #d4af37 !important;
+    }
+
+    small {
+      color: #aaa;
+    }
+
+    #selectedCategoriesPreview {
+      color: #d4af37;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>📸 <span>גביע עפולה</span></h1>
+  <div class="subtitle">🎬 רישום לצילום מקצועי · תחרות ריקוד 💃</div>
+
+  <div class="steps-indicator">
+    <div class="step active" data-step="1">🎯 1. סוג צילום</div>
+    <div class="step" data-step="2">👤 2. פרטים אישיים</div>
+    <div class="step" data-step="3">🏆 3. קטגוריות</div>
+    <div class="step" data-step="4">✅ 4. סיכום</div>
+  </div>
+
+  <form id="registrationForm" action="https://formsubmit.co/2mmedia.il@gmail.com" method="POST">
+    <!-- Hidden fields for categories - will be populated dynamically -->
+    <div id="hiddenCategoriesContainer"></div>
+    
+    <!-- שלב 1: סוג רישום וצילום -->
+    <div class="form-step active-step" id="step1">
+      <label>💎 סוג רישום:</label>
+      <div class="radio-group" id="regTypeGroup">
+        <div class="radio-option"><input type="radio" name="registrationType" value="free" id="regFree" checked> <label for="regFree">🆓 חינם</label></div>
+        <div class="radio-option"><input type="radio" name="registrationType" value="paid" id="regPaid"> <label for="regPaid">⭐ מסלול פרימיום (10 ש"ח לקטגוריה)</label></div>
+      </div>
+      <small>✨ מסלול פרימיום מעניק עדיפות בצילום והנחה של 20% לכל ההזמנה</small>
+
+      <label style="margin-top:1.5rem;">📷 אני מעוניין/ת ב:</label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="mediaType" value="photo" id="photoOnly" checked> <label for="photoOnly">📸 צילום סטילס בלבד</label></div>
+        <div class="radio-option"><input type="radio" name="mediaType" value="video" id="videoOnly"> <label for="videoOnly">🎥 וידאו בלבד</label></div>
+        <div class="radio-option"><input type="radio" name="mediaType" value="both" id="bothMedia"> <label for="bothMedia">📸🎥 גם סטילס וגם וידאו</label></div>
+      </div>
+      <div class="nav-buttons">
+        <div></div>
+        <button type="button" id="toStep2">המשך ➡️</button>
+      </div>
+    </div>
+
+    <!-- שלב 2: פרטי רקדנים -->
+    <div class="form-step" id="step2">
+      <label>💃 סוג ריקוד:</label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="danceType" value="solo" id="solo" checked> <label for="solo">🧍 סולו</label></div>
+        <div class="radio-option"><input type="radio" name="danceType" value="couple" id="couple"> <label for="couple">👫 זוג</label></div>
+      </div>
+
+      <div id="soloFields">
+        <label>👤 שם מלא של הרקדן/ית</label>
+        <input type="text" name="soloFullName" placeholder="ישראל ישראלי" id="soloNameInput">
+        <label>📱 אינסטגרם (Instagram) של הרקדן/ית</label>
+        <input type="text" name="soloInstagram" placeholder="@username" id="soloInstagramInput">
+      </div>
+      <div id="coupleFields" style="display:none;">
+        <label>👨 שם מלא של הרקדן</label>
+        <input type="text" name="partnerMale" placeholder="שם פרטי + משפחה" id="maleNameInput">
+        <label>📱 אינסטגרם (Instagram) של הרקדן</label>
+        <input type="text" name="partnerMaleInstagram" placeholder="@username" id="maleInstagramInput">
+        <label>👩 שם מלא של הרקדנית</label>
+        <input type="text" name="partnerFemale" placeholder="שם פרטי + משפחה" id="femaleNameInput">
+        <label>📱 אינסטגרם (Instagram) של הרקדנית</label>
+        <input type="text" name="partnerFemaleInstagram" placeholder="@username" id="femaleInstagramInput">
+      </div>
+
+      <label>📞 טלפון ליצירת קשר</label>
+      <input type="tel" name="phone" placeholder="050-0000000" required>
+      <label>📧 דוא"ל</label>
+      <input type="email" name="email" placeholder="your@email.com" required>
+
+      <div class="nav-buttons">
+        <button type="button" class="secondary" id="backTo1">⬅️ חזרה</button>
+        <button type="button" id="toStep3">המשך לקטגוריות ➡️</button>
+      </div>
+    </div>
+
+    <!-- שלב 3: קטגוריות (בחירה מרובה) -->
+    <div class="form-step" id="step3">
+      <p style="font-weight:bold; margin-bottom:0.5rem; color: #ffffff;">🏆 בחר קטגוריות (ניתן לבחור מספר):</p>
+      <div id="categoriesContainer" style="max-height: 450px; overflow-y: auto; padding-left: 5px;">
+        <!-- ימולא דינמית -->
+      </div>
+      <div style="margin-top: 1rem; background: #2a2a2a; padding: 0.8rem; border-radius: 16px; border: 1px solid #d4af37;">
+        <span style="font-weight: bold; color: #ffffff;">✅ קטגוריות שנבחרו: </span>
+        <span id="selectedCategoriesPreview" style="font-weight: bold;">לא נבחרו קטגוריות</span>
+      </div>
+      <div class="nav-buttons">
+        <button type="button" class="secondary" id="backTo2">⬅️ חזרה</button>
+        <button type="button" id="toStep4">לסיכום ➡️</button>
+      </div>
+    </div>
+
+    <!-- שלב 4: סיכום -->
+    <div class="form-step" id="step4">
+      <h3 style="color:#d4af37; margin-bottom:1rem;">✅ סיכום הרישום</h3>
+      <div id="summaryContent" class="summary-box"></div>
+      <div class="nav-buttons">
+        <button type="button" class="secondary" id="backTo3">⬅️ חזרה</button>
+        <button type="submit" id="submitBtn">📩 שלח רישום</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  (function() {
+    const categories = {
+      "חלק א": {
+        "Medalist": ["3-5: סולו", "3-5: זוגות"],
+        "N2": ["5-7 סולו", "5-7 זוגות", "8-9 סולו", "8-9 זוגות", "10-11 סולו", "10-11 זוגות", "12-15 סולו", "12-15 זוגות"],
+        "N3": ["5-7 סולו", "5-7 זוגות", "8-9 סולו", "8-9 זוגות", "10-11 סולו", "10-11 זוגות", "12-15 סולו", "12-15 זוגות"],
+        "H": ["5-7 סולו", "5-7 זוגות", "8-9 סולו", "8-9 זוגות", "10-11 סולו", "10-11 זוגות", "12-15 סולו", "12-15 זוגות"],
+        "F": ["5-7 סולו", "5-7 זוגות", "8-9 סולו", "8-9 זוגות", "10-11 סולו", "10-11 זוגות"],
+        "LA E": ["5-7 סולו", "5-7 זוגות", "8-9 סולו", "8-9 זוגות", "10-11 סולו", "10-11 זוגות"],
+        "ST E": ["5-7 סולו", "5-7 זוגות", "8-9 סולו", "8-9 זוגות", "10-11 סולו", "10-11 זוגות"],
+        "LA D": ["6-11 סולו", "6-11 זוגות"],
+        "ST D": ["6-11 סולו", "6-11 זוגות"],
+        "Waltz": ["6-9 סולו", "6-9 זוגות", "10-11 סולו", "10-11 זוגות"],
+        "ChaCha": ["6-9 סולו", "6-9 זוגות", "10-11 סולו", "10-11 זוגות"],
+        "Formation": ["6-11", "12-15"]
+      },
+      "חלק ב": {
+        "F": ["12-13 סולו", "12-13 זוגות", "14-15 סולו", "14-15 זוגות", "16+ סולו", "16+ זוגות"],
+        "E": ["12-13 סולו", "12-13 זוגות", "14-15 סולו", "14-15 זוגות", "16+ סולו", "16+ זוגות"],
+        "D": ["12-13 סולו", "12-13 זוגות", "14-15 סולו", "14-15 זוגות", "16+ סולו", "16+ זוגות"],
+        "LA OPEN": ["12-13 סולו", "12-13 זוגות", "14-15 סולו", "14-15 זוגות", "16+ סולו", "16+ זוגות"],
+        "ST OPEN": ["12-13 סולו", "12-13 זוגות", "14-15 סולו", "14-15 זוגות", "16+ סולו", "16+ זוגות"],
+        "Tango": ["12-13 סולו", "12-13 זוגות", "14+ סולו", "14+ זוגות"],
+        "Rumba": ["12-13 סולו", "14+ סולו"],
+        "Samba": ["12-13", "14+"]
+      }
+    };
+
+    const form = document.getElementById('registrationForm');
+    const steps = document.querySelectorAll('.form-step');
+    const stepIndicators = document.querySelectorAll('.step');
+    let currentStep = 1;
+
+    function showStep(step) {
+      steps.forEach(s => s.classList.remove('active-step'));
+      document.getElementById(`step${step}`).classList.add('active-step');
+      stepIndicators.forEach(ind => ind.classList.remove('active'));
+      document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+      currentStep = step;
+      if (step === 4) updateSummary();
+    }
+
+    document.getElementById('toStep2').addEventListener('click', ()=> showStep(2));
+    document.getElementById('backTo1').addEventListener('click', ()=> showStep(1));
+    document.getElementById('toStep3').addEventListener('click', ()=> { renderCategories(); showStep(3); });
+    document.getElementById('backTo2').addEventListener('click', ()=> showStep(2));
+    document.getElementById('toStep4').addEventListener('click', ()=> { updateHiddenCategories(); updateSummary(); showStep(4); });
+    document.getElementById('backTo3').addEventListener('click', ()=> showStep(3));
+
+    const soloRadio = document.getElementById('solo');
+    const coupleRadio = document.getElementById('couple');
+    const soloFields = document.getElementById('soloFields');
+    const coupleFields = document.getElementById('coupleFields');
+
+    function toggleDanceFields() {
+      if (coupleRadio.checked) {
+        soloFields.style.display = 'none';
+        coupleFields.style.display = 'block';
+      } else {
+        soloFields.style.display = 'block';
+        coupleFields.style.display = 'none';
+      }
+    }
+    soloRadio.addEventListener('change', toggleDanceFields);
+    coupleRadio.addEventListener('change', toggleDanceFields);
+    toggleDanceFields();
+
+    function updateHiddenCategories() {
+      const container = document.getElementById('hiddenCategoriesContainer');
+      container.innerHTML = '';
+      const selected = getSelectedCategories();
+      selected.forEach(cat => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'categories';
+        input.value = cat;
+        container.appendChild(input);
+      });
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categoriesContainer');
+      container.innerHTML = '';
+      for (let [part, groups] of Object.entries(categories)) {
+        const partHeader = document.createElement('h4');
+        partHeader.style.margin = '0.8rem 0 0.4rem';
+        partHeader.textContent = `📋 ${part}`;
+        container.appendChild(partHeader);
+        for (let [group, items] of Object.entries(groups)) {
+          items.forEach(item => {
+            const fullName = `${group} - ${item}`;
+            const div = document.createElement('div');
+            div.className = 'category-card';
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.name = 'categories_checkbox';
+            cb.value = fullName;
+            cb.id = `cat_${fullName.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'')}`;
+            cb.addEventListener('change', updateSelectedPreview);
+            const lbl = document.createElement('label');
+            lbl.htmlFor = cb.id;
+            lbl.textContent = fullName;
+            div.appendChild(cb);
+            div.appendChild(lbl);
+            container.appendChild(div);
+          });
+        }
+      }
+      updateSelectedPreview();
+    }
+
+    function getSelectedCategories() {
+      return Array.from(document.querySelectorAll('input[name="categories_checkbox"]:checked')).map(cb => cb.value);
+    }
+
+    function updateSelectedPreview() {
+      const previewSpan = document.getElementById('selectedCategoriesPreview');
+      if (!previewSpan) return;
+      const selected = getSelectedCategories();
+      if (selected.length === 0) {
+        previewSpan.innerHTML = 'לא נבחרו קטגוריות';
+        previewSpan.style.color = '#ff6b6b';
+        return;
+      }
+      previewSpan.style.color = '#d4af37';
+      previewSpan.innerHTML = selected.map(cat => `<span class="selected-category-tag">${cat}</span>`).join(' ');
+    }
+
+    function updateSummary() {
+      const regType = document.querySelector('input[name="registrationType"]:checked')?.value;
+      const media = document.querySelector('input[name="mediaType"]:checked')?.value;
+      const dance = document.querySelector('input[name="danceType"]:checked')?.value;
+      let dancerInfo = '';
+      let instagramInfo = '';
+      
+      if (dance === 'solo') {
+        const soloName = document.getElementById('soloNameInput')?.value || '(לא צוין)';
+        const soloInsta = document.getElementById('soloInstagramInput')?.value || 'לא צוין';
+        dancerInfo = soloName;
+        instagramInfo = `📱 אינסטגרם: ${soloInsta}`;
+      } else {
+        const male = document.getElementById('maleNameInput')?.value || '';
+        const female = document.getElementById('femaleNameInput')?.value || '';
+        const maleInsta = document.getElementById('maleInstagramInput')?.value || 'לא צוין';
+        const femaleInsta = document.getElementById('femaleInstagramInput')?.value || 'לא צוין';
+        dancerInfo = `👨 רקדן: ${male}<br>👩 רקדנית: ${female}`;
+        instagramInfo = `📱 אינסטגרם רקדן: ${maleInsta}<br>📱 אינסטגרם רקדנית: ${femaleInsta}`;
+      }
+      
+      const phone = document.querySelector('input[name="phone"]')?.value || '-';
+      const email = document.querySelector('input[name="email"]')?.value || '-';
+      const cats = getSelectedCategories();
+      const paidText = regType === 'paid' ? '⭐ פרימיום (10 ש"ח לקטגוריה)' : '🆓 חינם';
+      const mediaText = media === 'photo' ? '📸 סטילס' : media==='video' ? '🎥 וידאו' : '📸🎥 סטילס+וידאו';
+
+      document.getElementById('summaryContent').innerHTML = `
+        <p><strong>💎 מסלול:</strong> ${paidText}</p>
+        <p><strong>🎬 סוג מדיה:</strong> ${mediaText}</p>
+        <p><strong>💃 סוג ריקוד:</strong> ${dance==='solo'?'🧍 סולו':'👫 זוג'}</p>
+        <p><strong>👤 שם/ות:</strong><br> ${dancerInfo}</p>
+        <p>${instagramInfo}</p>
+        <p><strong>📞 טלפון:</strong> ${phone}</p>
+        <p><strong>📧 דוא"ל:</strong> ${email}</p>
+        <p><strong>🏆 קטגוריות (${cats.length}):</strong><br> ${cats.length ? cats.map(c => `<span class="selected-category-tag">${c}</span>`).join(' ') : '<span style="color:#ff6b6b;">לא נבחרו</span>'}</p>
+      `;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      updateHiddenCategories();
+      const cats = getSelectedCategories();
+      if (cats.length === 0) {
+        alert('יש לבחור לפחות קטגוריה אחת');
+        showStep(3);
+        return;
+      }
+      const dance = document.querySelector('input[name="danceType"]:checked').value;
+      if (dance === 'solo' && !document.getElementById('soloNameInput').value.trim()) {
+        alert('נא למלא שם רקדן/ית בסולו');
+        showStep(2);
+        return;
+      }
+      if (dance === 'couple') {
+        const m = document.getElementById('maleNameInput').value.trim();
+        const f = document.getElementById('femaleNameInput').value.trim();
+        if (!m || !f) {
+          alert('יש למלא שמות שני הרקדנים');
+          showStep(2);
+          return;
+        }
+      }
+      alert('הטופס נשלח בהצלחה! תודה שנרשמת.');
+      form.submit();
+    });
+
+    renderCategories();
+  })();
+</script>
+</body>
+</html>
