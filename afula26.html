@@ -133,6 +133,10 @@
       border-color: #d4af37;
       box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
     }
+    input.error, select.error {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
+    }
 
     .radio-group, .checkbox-group {
       display: flex;
@@ -257,6 +261,7 @@
       font-size: 0.85rem;
       margin-top: -0.5rem;
       margin-bottom: 0.8rem;
+      display: none;
     }
 
     .selected-category-tag {
@@ -296,7 +301,6 @@
   </div>
 
   <form id="registrationForm" action="https://formsubmit.co/2mmedia.il@gmail.com" method="POST">
-    <!-- Hidden fields for categories - will be populated dynamically -->
     <div id="hiddenCategoriesContainer"></div>
     
     <!-- שלב 1: סוג רישום וצילום -->
@@ -329,26 +333,34 @@
       </div>
 
       <div id="soloFields">
-        <label>👤 שם מלא של הרקדן/ית</label>
-        <input type="text" name="soloFullName" placeholder="ישראל ישראלי" id="soloNameInput">
-        <label>📱 אינסטגרם (Instagram) של הרקדן/ית</label>
-        <input type="text" name="soloInstagram" placeholder="@username" id="soloInstagramInput">
+        <label>👤 שם מלא של הרקדן/ית <span style="color:#ff6b6b;">*</span></label>
+        <input type="text" name="soloFullName" placeholder="ישראל ישראלי" id="soloNameInput" class="required-field">
+        <div class="error-message" id="soloNameError">שדה חובה – נא למלא שם מלא</div>
+        <label>📱 אינסטגרם (Instagram) של הרקדן/ית <span style="color:#ff6b6b;">*</span></label>
+        <input type="text" name="soloInstagram" placeholder="@username" id="soloInstagramInput" class="required-field">
+        <div class="error-message" id="soloInstagramError">שדה חובה – נא למלא אינסטגרם</div>
       </div>
       <div id="coupleFields" style="display:none;">
-        <label>👨 שם מלא של הרקדן</label>
-        <input type="text" name="partnerMale" placeholder="שם פרטי + משפחה" id="maleNameInput">
-        <label>📱 אינסטגרם (Instagram) של הרקדן</label>
-        <input type="text" name="partnerMaleInstagram" placeholder="@username" id="maleInstagramInput">
-        <label>👩 שם מלא של הרקדנית</label>
-        <input type="text" name="partnerFemale" placeholder="שם פרטי + משפחה" id="femaleNameInput">
-        <label>📱 אינסטגרם (Instagram) של הרקדנית</label>
-        <input type="text" name="partnerFemaleInstagram" placeholder="@username" id="femaleInstagramInput">
+        <label>👨 שם מלא של הרקדן <span style="color:#ff6b6b;">*</span></label>
+        <input type="text" name="partnerMale" placeholder="שם פרטי + משפחה" id="maleNameInput" class="required-field">
+        <div class="error-message" id="maleNameError">שדה חובה – נא למלא שם רקדן</div>
+        <label>📱 אינסטגרם (Instagram) של הרקדן <span style="color:#ff6b6b;">*</span></label>
+        <input type="text" name="partnerMaleInstagram" placeholder="@username" id="maleInstagramInput" class="required-field">
+        <div class="error-message" id="maleInstagramError">שדה חובה – נא למלא אינסטגרם רקדן</div>
+        <label>👩 שם מלא של הרקדנית <span style="color:#ff6b6b;">*</span></label>
+        <input type="text" name="partnerFemale" placeholder="שם פרטי + משפחה" id="femaleNameInput" class="required-field">
+        <div class="error-message" id="femaleNameError">שדה חובה – נא למלא שם רקדנית</div>
+        <label>📱 אינסטגרם (Instagram) של הרקדנית <span style="color:#ff6b6b;">*</span></label>
+        <input type="text" name="partnerFemaleInstagram" placeholder="@username" id="femaleInstagramInput" class="required-field">
+        <div class="error-message" id="femaleInstagramError">שדה חובה – נא למלא אינסטגרם רקדנית</div>
       </div>
 
-      <label>📞 טלפון ליצירת קשר</label>
-      <input type="tel" name="phone" placeholder="050-0000000" required>
-      <label>📧 דוא"ל</label>
-      <input type="email" name="email" placeholder="your@email.com" required>
+      <label>📞 טלפון ליצירת קשר <span style="color:#ff6b6b;">*</span></label>
+      <input type="tel" name="phone" placeholder="050-0000000" id="phoneInput" class="required-field">
+      <div class="error-message" id="phoneError">שדה חובה – נא למלא מספר טלפון</div>
+      <label>📧 דוא"ל <span style="color:#ff6b6b;">*</span></label>
+      <input type="email" name="email" placeholder="your@email.com" id="emailInput" class="required-field">
+      <div class="error-message" id="emailError">שדה חובה – נא למלא דוא"ל תקין</div>
 
       <div class="nav-buttons">
         <button type="button" class="secondary" id="backTo1">⬅️ חזרה</button>
@@ -356,12 +368,11 @@
       </div>
     </div>
 
-    <!-- שלב 3: קטגוריות (בחירה מרובה) -->
+    <!-- שלב 3: קטגוריות -->
     <div class="form-step" id="step3">
-      <p style="font-weight:bold; margin-bottom:0.5rem; color: #ffffff;">🏆 בחר קטגוריות (ניתן לבחור מספר):</p>
-      <div id="categoriesContainer" style="max-height: 450px; overflow-y: auto; padding-left: 5px;">
-        <!-- ימולא דינמית -->
-      </div>
+      <p style="font-weight:bold; margin-bottom:0.5rem; color: #ffffff;">🏆 בחר קטגוריות (לפחות אחת):</p>
+      <div id="categoriesContainer" style="max-height: 450px; overflow-y: auto; padding-left: 5px;"></div>
+      <div id="categoryError" class="error-message" style="display:block; margin-top:0.5rem; color:#ff6b6b;">יש לבחור לפחות קטגוריה אחת</div>
       <div style="margin-top: 1rem; background: #2a2a2a; padding: 0.8rem; border-radius: 16px; border: 1px solid #d4af37;">
         <span style="font-weight: bold; color: #ffffff;">✅ קטגוריות שנבחרו: </span>
         <span id="selectedCategoriesPreview" style="font-weight: bold;">לא נבחרו קטגוריות</span>
@@ -427,11 +438,103 @@
       if (step === 4) updateSummary();
     }
 
+    // Clear all error states
+    function clearErrors() {
+      document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.required-field').forEach(el => el.classList.remove('error'));
+    }
+
+    // Show specific error
+    function showFieldError(inputId, errorId) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      if (input) input.classList.add('error');
+      if (error) error.style.display = 'block';
+    }
+
+    // Validate step 2 fields
+    function validateStep2() {
+      clearErrors();
+      let valid = true;
+      const dance = document.querySelector('input[name="danceType"]:checked').value;
+      const phone = document.getElementById('phoneInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!phone) {
+        showFieldError('phoneInput', 'phoneError');
+        valid = false;
+      }
+      if (!email || !emailRegex.test(email)) {
+        showFieldError('emailInput', 'emailError');
+        valid = false;
+      }
+
+      if (dance === 'solo') {
+        const soloName = document.getElementById('soloNameInput').value.trim();
+        const soloInsta = document.getElementById('soloInstagramInput').value.trim();
+        if (!soloName) {
+          showFieldError('soloNameInput', 'soloNameError');
+          valid = false;
+        }
+        if (!soloInsta) {
+          showFieldError('soloInstagramInput', 'soloInstagramError');
+          valid = false;
+        }
+      } else {
+        const male = document.getElementById('maleNameInput').value.trim();
+        const maleInsta = document.getElementById('maleInstagramInput').value.trim();
+        const female = document.getElementById('femaleNameInput').value.trim();
+        const femaleInsta = document.getElementById('femaleInstagramInput').value.trim();
+        if (!male) {
+          showFieldError('maleNameInput', 'maleNameError');
+          valid = false;
+        }
+        if (!maleInsta) {
+          showFieldError('maleInstagramInput', 'maleInstagramError');
+          valid = false;
+        }
+        if (!female) {
+          showFieldError('femaleNameInput', 'femaleNameError');
+          valid = false;
+        }
+        if (!femaleInsta) {
+          showFieldError('femaleInstagramInput', 'femaleInstagramError');
+          valid = false;
+        }
+      }
+      return valid;
+    }
+
+    // Validate step 3 categories
+    function validateStep3() {
+      const catError = document.getElementById('categoryError');
+      const selected = getSelectedCategories();
+      if (selected.length === 0) {
+        if (catError) catError.style.display = 'block';
+        return false;
+      } else {
+        if (catError) catError.style.display = 'none';
+        return true;
+      }
+    }
+
     document.getElementById('toStep2').addEventListener('click', ()=> showStep(2));
     document.getElementById('backTo1').addEventListener('click', ()=> showStep(1));
-    document.getElementById('toStep3').addEventListener('click', ()=> { renderCategories(); showStep(3); });
+    document.getElementById('toStep3').addEventListener('click', ()=> {
+      if (validateStep2()) {
+        renderCategories();
+        showStep(3);
+      }
+    });
     document.getElementById('backTo2').addEventListener('click', ()=> showStep(2));
-    document.getElementById('toStep4').addEventListener('click', ()=> { updateHiddenCategories(); updateSummary(); showStep(4); });
+    document.getElementById('toStep4').addEventListener('click', ()=> {
+      if (validateStep3()) {
+        updateHiddenCategories();
+        updateSummary();
+        showStep(4);
+      }
+    });
     document.getElementById('backTo3').addEventListener('click', ()=> showStep(3));
 
     const soloRadio = document.getElementById('solo');
@@ -440,6 +543,7 @@
     const coupleFields = document.getElementById('coupleFields');
 
     function toggleDanceFields() {
+      clearErrors();
       if (coupleRadio.checked) {
         soloFields.style.display = 'none';
         coupleFields.style.display = 'block';
@@ -483,7 +587,12 @@
             cb.name = 'categories_checkbox';
             cb.value = fullName;
             cb.id = `cat_${fullName.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'')}`;
-            cb.addEventListener('change', updateSelectedPreview);
+            cb.addEventListener('change', function() {
+              updateSelectedPreview();
+              if (getSelectedCategories().length > 0) {
+                document.getElementById('categoryError').style.display = 'none';
+              }
+            });
             const lbl = document.createElement('label');
             lbl.htmlFor = cb.id;
             lbl.textContent = fullName;
@@ -534,8 +643,8 @@
         instagramInfo = `📱 אינסטגרם רקדן: ${maleInsta}<br>📱 אינסטגרם רקדנית: ${femaleInsta}`;
       }
       
-      const phone = document.querySelector('input[name="phone"]')?.value || '-';
-      const email = document.querySelector('input[name="email"]')?.value || '-';
+      const phone = document.getElementById('phoneInput')?.value || '-';
+      const email = document.getElementById('emailInput')?.value || '-';
       const cats = getSelectedCategories();
       const paidText = regType === 'paid' ? '⭐ פרימיום (10 ש"ח לקטגוריה)' : '🆓 חינם';
       const mediaText = media === 'photo' ? '📸 סטילס' : media==='video' ? '🎥 וידאו' : '📸🎥 סטילס+וידאו';
@@ -555,26 +664,15 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       updateHiddenCategories();
-      const cats = getSelectedCategories();
-      if (cats.length === 0) {
-        alert('יש לבחור לפחות קטגוריה אחת');
-        showStep(3);
-        return;
-      }
-      const dance = document.querySelector('input[name="danceType"]:checked').value;
-      if (dance === 'solo' && !document.getElementById('soloNameInput').value.trim()) {
-        alert('נא למלא שם רקדן/ית בסולו');
+      if (!validateStep2()) {
+        alert('אנא מלא את כל שדות החובה בשלב 2.');
         showStep(2);
         return;
       }
-      if (dance === 'couple') {
-        const m = document.getElementById('maleNameInput').value.trim();
-        const f = document.getElementById('femaleNameInput').value.trim();
-        if (!m || !f) {
-          alert('יש למלא שמות שני הרקדנים');
-          showStep(2);
-          return;
-        }
+      if (!validateStep3()) {
+        alert('יש לבחור לפחות קטגוריה אחת.');
+        showStep(3);
+        return;
       }
       alert('הטופס נשלח בהצלחה! תודה שנרשמת.');
       form.submit();
